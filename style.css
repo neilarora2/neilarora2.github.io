@@ -1,0 +1,45 @@
+body{
+    margin: 0;
+    margin-top: 0;
+    background-color: black;
+    
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-style: italic;
+    background-image: url("metal.jpg");
+
+  }
+  .sec {
+    
+    background-image: url("magic1.JPG");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-color: gray;
+  }
+  h1 {
+    
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-style: italic;
+    background-color: white;
+    color: black;
+    text-align: left;
+    position: sticky;
+    top:0;
+    z-index: 100;
+ 
+    align-items: center;
+
+
+  }
+  a {
+    color: black;
+  }
+  #mylogo {
+    position: relative;
+    nav-down: 100;
+    
+  }
+  br {
+    height: 200;
+  }
