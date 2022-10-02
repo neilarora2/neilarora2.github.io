@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset = "utf-S"/>
+        <title> Joe's Hotdogs </title>
+        <style> 
+            body{
+             display: block;
+             background-color: gray;
+             text-align: center;
+             font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            }
+            h1{
+                margin-top: 100px;
+                font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+                background-color: orange;
+            }
+            ul{
+             list-style: none;
+             background-color: yellow;
+             text-align: center;
+  
+            }
+            #final{
+                font-weight: bold;
+      
+                text-align: center;
+                font-size: larger;
+            }
+        </style>
+    </head>
+    <body>
+
+        <h1> Welcome to Joe's Hotdogs!</h1>
+
+        <ul>
+            <li id ="hotdogs"></li>
+            <li id ="fries"></li>
+            <li id ="sodas"></li>
+            <li id ="subtotal"></li>
+            <li id = "discount"></li>
+            <li id ="tax"></li>
+            <li id ="final"></li>
+        </ul>
+
+        <script>
+            h = prompt("How Many Hotdogs Do You Want?", "");
+            f = prompt("How Many Fries Do You Want?", "");
+            s = prompt("How Many Sodas Do You Want?", "");
+            
+            if (h > 0){
+                document.getElementById("hotdogs").innerHTML ="Hotdogs: " + h;
+
+            }
+            if (f > 0){
+                document.getElementById("fries").innerHTML = "Fries: " + f;
+
+            }
+            if (s > 0){
+                document.getElementById("sodas").innerHTML = "Sodas: " + s;
+
+            }
+
+            subtotal = (h*4.25)+(f*2.60)+(s*1.50);
+            
+            if (subtotal > 20) {
+                discount = (0.1*subtotal);
+                subtotal = (0.9*subtotal);
+                document.getElementById("discount").innerHTML = "Discount: -$" + discount.toFixed(2);
+
+            }
+            
+            document.getElementById("subtotal").innerHTML = "Subtotal: $" + subtotal.toFixed(2);
+
+            
+            tax = (.0625*subtotal);
+            document.getElementById("tax").innerHTML = "Tax: $" + tax.toFixed(2);
+
+           
+            final = subtotal+tax;
+            
+           
+     
+            document.getElementById("final").innerHTML = "Total: $" + final.toFixed(2);
+
+         
+        
+        </script>
+    </body>
+</html>
