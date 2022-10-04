@@ -47,6 +47,24 @@
             h = prompt("How Many Hotdogs Do You Want?", "");
             f = prompt("How Many Fries Do You Want?", "");
             s = prompt("How Many Sodas Do You Want?", "");
+
+            function toDollar(num){
+                
+                small_rounded = Math.round(num*100)/100;
+                small_length = small_rounded.toString().length;
+                big_rounded = Math.round(num*100);
+                big_length = big_rounded.toString().length;
+                num_zeroes = big_length - small_length;
+           
+                if (num_zeroes == 2)
+                 dollar = small_rounded.toString() + ".00";
+                else if (num_zeroes == 0) 
+                 dollar = small_rounded.toString() + "0";
+                else
+                 dollar = small_rounded;
+
+                return dollar;
+            }
             
             if (h > 0){
                 document.getElementById("hotdogs").innerHTML ="Hotdogs: " + h;
@@ -66,24 +84,25 @@
             if (subtotal > 20) {
                 discount = (0.1*subtotal);
                 subtotal = (0.9*subtotal);
-                document.getElementById("discount").innerHTML = "Discount: -$" + discount.toFixed(2);
+                document.getElementById("discount").innerHTML = "Discount: -$" + toDollar(discount);
 
             }
             
-            document.getElementById("subtotal").innerHTML = "Subtotal: $" + subtotal.toFixed(2);
+            document.getElementById("subtotal").innerHTML = "Subtotal: $" + toDollar(subtotal);
 
             
             tax = (.0625*subtotal);
-            document.getElementById("tax").innerHTML = "Tax: $" + tax.toFixed(2);
+            document.getElementById("tax").innerHTML = "Tax: $" + toDollar(tax);
 
            
             final = subtotal+tax;
             
            
      
-            document.getElementById("final").innerHTML = "Total: $" + final.toFixed(2);
+            document.getElementById("final").innerHTML = "Total: $" + toDollar(final);
 
          
+        
         
         </script>
     </body>
