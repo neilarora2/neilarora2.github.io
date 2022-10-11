@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset = "utf-S"/>
+        <title> Amicable Numbers </title>
+        <style> 
+            
+        </style>
+    </head>
+    <body>
+
+        <h1> </h1>
+       
+        
+        <div id = "amicable?"></div>
+        <div id = "writefactors"></div>
+     
+        <script>
+            
+            num1 = prompt("Number 1: ");
+            num2 = prompt("Number 2: ");
+
+            factors1 = [];
+            factors2 = [];
+            for(i = 0; i < num1; i++){
+                if(num1 % i == 0) factors1.push(i);
+            }
+            for(i = 0; i < num1; i++){
+                if(num2 % i == 0) factors2.push(i);
+            }
+
+            listfactors = "Factors of " + num1 + ": ";
+            factors1.forEach(function(entry) {
+                listfactors += entry + " ";
+            })
+            
+            listfactors += "<br /> Factors of " + num2 + ": ";  
+            factors2.forEach(function(entry) {
+                listfactors += entry + " ";
+            })
+            
+            document.getElementById("writefactors").innerHTML = listfactors;
+
+            
+            sum1 = factors1.reduce((x, y) => x + y, 0);
+            sum2 = factors2.reduce((x, y) => x + y, 0);
+
+            amicable = "The numbers: " + num1 + " and " + num2;
+            if((sum1 == num2) && (sum2 == num1)) amicable += " are amicable";
+            else amicable += " are not amicable";
+
+            document.getElementById("amicable?").innerHTML = amicable;
+
+
+        </script>
+
+   
+
+   
+    </body>
+</html>
