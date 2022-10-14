@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Jade Delight</title>
+<style>
+	label {
+  text-align:right;
+  display:inline-block;
+  min-width:120px;
+}
+</style>
+</head>
+
+<body>
+<div id = "test"></div>
+<script>
+
+function MenuItem(name, cost)
+{
+	this.name = name;
+	this.cost=cost;
+}
+
+menuItems = new Array(
+	new MenuItem("Chicken Chop Suey", 5.5),
+	new MenuItem("Sweet and Sour Pork", 7.25),
+	new MenuItem("Shrimp Lo Mein", 6.80),
+	new MenuItem("Moo Shi Chicken", 9.50),
+	new MenuItem("Fried Rice", 3.25)
+);
+
+function makeSelect(name, minRange, maxRange)
+{
+	var t= "";
+	t = "<select name='" + name + "' size='1'>";
+	for (j=minRange; j<=maxRange; j++)
+	   t += "<option>" + j + "</option>";
+	t+= "</select>"; 
+	return t;
+}
+
+function td(content, className="")
+{
+	return "<td class = '" + className + "'>" + content + "</td>";
+}
+	
+</script>
+
+<h1>Jade Delight</h1>
+<form>
+
+<p class="userInfo"><label>First Name:</label> <input type="text"  name='fname' /></p>
+<p class="userInfo"><label>Last Name*:</label>  <input type="text"  name='lname' /></p>
+<p class="userInfo address"><label>Street*:</label> <input type="text" name='street' /></p>
+<p class="userInfo address"><label>City*:</label> <input type="text" name='city' /></p>
+<p class="userInfo"><label>Phone*:</label> <input type="text"  name='phone' /></p>
+<p> 
+	<input type="radio" name="p_or_d" value = "pickup" checked= "checked" />Pickup  
+	<input type="radio" name='p_or_d' value = 'delivery'/>
+	Delivery
+</p>
+<table border="0" cellpadding="3">
+  <tr>
+    <th>Select Item</th>
+    <th>Item Name</th>
+    <th>Cost Each</th>
+    <th>Total Cost</th>
+  </tr>
+<script>
+
+  var s = "";
+  for (i=0; i< menuItems.length; i++)
+  {
+	  s += "<tr>";
+	  s += td(makeSelect("quan" + i, 0, 10),"selectQuantity");
+	  s += td(menuItems[i].name, "itemName");
+	  s += td("$" +menuItems[i].cost.toFixed(2), "cost");
+	  s += td("$<input type='text' name='cost'/>", "totalCost");
+	  s+= "</tr>";
+  }
+  document.writeln(s);
+</script>
+</table>
+<p class="subtotal totalSection"><label>Subtotal:</label> 
+   $ <input type="text"  name='subtotal' id="subtotal" />
+</p>
+<p class="tax totalSection"><label>Mass tax 6.25%:</label>
+  $ <input type="text"  name='tax' id="tax" />
+</p>
+<p class="total totalSection"><label>Total:</label> $ <input type="text"  name='total' id="total" />
+</p>
+
+<input type = "button" value = "Submit Order"/>
+
+</form>
+
+<script>
+	window.onload = function(){
+		document.getElementsByClassName("userInfo address")[0].style.display = "none";
+		document.getElementsByClassName("userInfo address")[1].style.display = "none";
+	}
+
+	function subtotal(){
+		sum = 0;
+		for(i = 0; i < menuItems.length; i++){
+			sum += parseFloat(document.getElementsByName("cost")[i].value);
+		}
+		return sum;
+	}
+
+
+	for(i = 0; i < menuItems.length; i++){
+		document.getElementsByName("quan" + i)[0].onchange = function(){
+			for(i = 0; i < menuItems.length; i++){
+				document.getElementsByName("cost")[i].value = (menuItems[i].cost * document.getElementsByName("quan" + i)[0].value).toFixed(2)
+				}
+				document.getElementById("subtotal").value = subtotal().toFixed(2);
+				document.getElementById("tax").value = (subtotal()*0.0625).toFixed(2);
+				document.getElementById("total").value = (subtotal()*1.0625).toFixed(2);
+		}
+	}
+
+	document.getElementsByName("p_or_d")[0].addEventListener("click",function(){
+		document.getElementsByClassName("userInfo address")[0].style.display = "none";
+		document.getElementsByClassName("userInfo address")[1].style.display = "none";
+		
+
+	})
+	
+	document.getElementsByName("p_or_d")[1].addEventListener("click",function(){
+		document.getElementsByClassName("userInfo address")[0].style.display = "block";
+		document.getElementsByClassName("userInfo address")[1].style.display = "block";
+	})
+	
+	document.getElementsByTagName("input")[15].onclick = function (){
+		lastname = document.getElementsByName("lname")[0].value;
+		if(lastname.length < 1){
+			alert("Please enter your last name to place an order!");
+			return;
+		}
+		
+		no_order = true;
+		for(i = 0; i < menuItems.length; i++){
+			no_order = no_order && (document.getElementsByName("quan" + i)[0].value == 0);
+		}
+
+		if(no_order){
+			alert("Please select an item to place an order!")
+			return;
+		}
+
+		function phonedigits(num){
+			count = 0;
+			for(i = 0; i < num.length; i++){
+				if((num.charAt(i) != ' ') && (!isNaN(num.charAt(i))))
+					count++;
+			}
+				return count;
+		}
+		
+		number = document.getElementsByName("phone")[0].value;
+		if((phonedigits(number) != 7) && (phonedigits(number) != 10)){
+			alert("Please enter a valid phone number!");
+			return;
+		}
+
+		d = new Date();
+		hour = d.getHours()
+		min = d.getMinutes() + 20;
+
+		if(document.getElementsByName("p_or_d")[0].checked == 1){
+			min = d.getMinutes() + 20;		
+		}
+		else if(document.getElementsByName("p_or_d")[1].checked == 1){
+			street = document.getElementsByName("street")[0].value;
+			city = document.getElementsByName("city")[0].value;
+			if((street.length < 1) || (city.length < 1)){
+				alert("Please enter an address (both street and city) for delivery!");
+				return;
+			}
+
+			min = d.getMinutes() + 40;
+		}
+
+		function time_ready(){
+			if(min > 59){
+			min = (min % 60)
+			hour += 1;
+			}
+			if(min < 10) min = ("0" + min);
+			
+			if(hour > 12 && hour < 24) tod = "PM";
+			else tod = "AM";
+
+			hour = hour % 12;
+			if(hour == 0) hour = 12;
+
+			return (hour + ":" + min + " " + tod)
+		}
+		
+		alert("Thank you for placing your order!")
+
+		popup = window.open("", "Your Receipt", "width=800,height=500");
+		popup.document.write("Your order will be ready at " + time_ready() + ". <br />" + 
+			"<br /> <div id = items></div> <br />" +
+			"Subtotal: $" + subtotal().toFixed(2) + "<br /> " +
+			"Tax: $" + (subtotal()*0.0625).toFixed(2) + "<br />" +
+			"Total: $" + (subtotal()*1.0625).toFixed(2))
+
+		iteminfo = ""
+		for(i = 0; i < menuItems.length; i++){
+			quantity = document.getElementsByName("quan" + i)[0].value;
+			item = menuItems[i].name;
+			totalcost = document.getElementsByName("cost")[i].value;
+			if(quantity > 0)
+				iteminfo += quantity + " " + item + " $" + totalcost + "<br />";
+		}
+		popup.document.getElementById("items").innerHTML = iteminfo;
+		
+	};
+
+</script>
+</body>
+</html>
