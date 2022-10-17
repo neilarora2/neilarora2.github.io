@@ -1,0 +1,37 @@
+<html>
+<head>
+  <title>Checkboxes</title>
+</head>
+<body>
+    <input type = "checkbox" id = "All" /> 
+    <label id = "checkall"></label> <br /> 
+    <br />
+    <input type = "checkbox" name = "box" /> first <br />
+    <input type = "checkbox" name = "box"/> second <br />
+    <input type = "checkbox" name = "box"/> third <br />
+    <input type = "checkbox" name = "box""/> fourth <br />
+
+
+  <script>
+    document.getElementById("checkall").innerHTML = "Check All";
+    document.getElementById("All").onclick = function(){
+        if( document.getElementById("checkall").innerHTML == "Check All"){
+            document.getElementById("checkall").innerHTML = "Uncheck All";
+            for(i = 0; i < 4; i++){
+                document.getElementsByName("box")[i].checked = true;
+            }
+
+        }
+        else{
+            document.getElementById("checkall").innerHTML = "Check All";
+            for(i = 0; i < 4; i++){
+                document.getElementsByName("box")[i].checked = false;
+            }
+
+
+        }
+    }
+    
+  </script>
+</body> 
+</html>
