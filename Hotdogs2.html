@@ -1,0 +1,158 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset = "utf-S"/>
+        <title> Joe's Hotdogs </title>
+        <style> 
+            body{
+             display: block;
+             background-color: gray;
+             text-align: center;
+             font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            }
+            h1{
+                margin-top: 100px;
+                font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+                background-color: orange;
+            }
+            ul{
+             list-style: none;
+             background-color: yellow;
+             text-align: center;
+  
+            }
+            #final{
+                font-weight: bold;
+      
+                text-align: center;
+                font-size: larger;
+            }
+            #selectors{
+                background-color: green;
+            }
+            .center{
+                margin-left: auto;
+                margin-right: auto;
+            }
+        </style>
+    </head>
+    <body>
+
+        <h1> Welcome to Joe's Hotdogs!</h1>
+
+        <div id = "selectors"></div>
+
+        <ul>
+            <li id ="hotdogs"></li>
+            <li id ="fries"></li>
+            <li id ="sodas"></li>
+            <li id ="subtotal"></li>
+            <li id = "discount"></li>
+            <li id ="tax"></li>
+            <li id ="final"></li>
+        </ul>
+
+        
+        
+
+        <script>
+    
+
+            function makeSelect(name){
+                var t= "";
+                t = "<select name='" + name + "' size='1'>";
+                for (j=0; j<=5; j++)
+                t += "<option>" + j + "</option>";
+                for (j=10; j<=20; j++)
+                if(j % 5 == 0)  t += "<option>" + j + "</option>";
+                t+= "</select>"; 
+                return t;
+            }
+
+
+                order = "<table class = 'center'> " +
+                        "<tr> <th> Item </th> <th> Price </th> <th> Quantity </td> </tr> " +
+                        "<tr> <td> Hotdogs </td> <td> $4.25 </td> <td>" + makeSelect("hotdog") + "</td> </tr>" +
+                        "<tr> <td> Fries </td> <td> $2.60 </td> <td>" + makeSelect("fry") + "</td> </tr>" +
+                        "<tr> <td> Soda </td> <td> $1.50 </td> <td>" + makeSelect("soda") + "</td> </tr>" +
+                        "</table> " +
+                        "<input type = 'button' id = 'submit' value = 'submit'/>";
+
+
+                document.getElementById("selectors").innerHTML = order;
+
+            
+                function toDollar(num){
+                    
+                    small_rounded = Math.round(num*100)/100;
+                    small_length = small_rounded.toString().length;
+                    big_rounded = Math.round(num*100);
+                    big_length = big_rounded.toString().length;
+                    num_zeroes = big_length - small_length;
+            
+                    if (num_zeroes == 2)
+                    dollar = small_rounded.toString() + ".00";
+                    else if (num_zeroes == 0) 
+                    dollar = small_rounded.toString() + "0";
+                    else
+                    dollar = small_rounded;
+
+                    return dollar;
+                }
+
+            
+
+             
+                document.getElementById("submit").onclick = function() {
+
+                   h = document.getElementsByTagName("select")[0].value;
+                   f = document.getElementsByTagName("select")[1].value;
+                   s = document.getElementsByTagName("select")[2].value;
+                
+                if(h == 0 && f == 0 && s == 0){
+                    alert("Please select an item to order!");
+                    return;
+                }
+            
+                if (h > 0){
+                    document.getElementById("hotdogs").innerHTML = "Hotdogs: " + h;
+
+                }
+                if (f > 0){
+                    document.getElementById("fries").innerHTML = "Fries: " + f;
+
+                }
+                if (s > 0){
+                    document.getElementById("sodas").innerHTML = "Sodas: " + s;
+
+                }
+
+                subtotal = (h*4.25)+(f*2.60)+(s*1.50);
+                
+                if (subtotal > 20) {
+                    discount = (0.1*subtotal);
+                    subtotal = (0.9*subtotal);
+                    document.getElementById("discount").innerHTML = "Discount: -$" + toDollar(discount);
+
+                }
+                
+                document.getElementById("subtotal").innerHTML = "Subtotal: $" + toDollar(subtotal);
+
+                
+                tax = (.0625*subtotal);
+                document.getElementById("tax").innerHTML = "Tax: $" + toDollar(tax);
+
+            
+                final = subtotal+tax;
+                
+            
+        
+                document.getElementById("final").innerHTML = "Total: $" + toDollar(final);
+            }
+
+        
+    
+        
+        </script>
+    </body>
+</html>
