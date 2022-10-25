@@ -1,0 +1,76 @@
+{"songs" : [
+    {
+        "Title" : "Teenage Dream",
+        "Artist" : "Katy Perry",
+        "Genre" : "Pop",
+        "Year" : 2010
+    },
+    {
+        "Title" : "Complicated",
+        "Artist" : "Avril Lavigne",
+        "Genre" : "Punk",
+        "Year" : 2002
+    },
+    {
+        "Title" : "i",
+        "Artist" : "Kendrick Lamar",
+        "Genre" : "Rap",
+        "Year" : 2015
+    },
+    {
+        "Title" : "Burn the House Down",
+        "Artist" : "AJR",
+        "Genre" : "Indie",
+        "Year" : 2017
+    },
+    {
+        "Title" : "Chicken Tenders",
+        "Artist" : "Dominic Fike",
+        "Genre" : "Indie",
+        "Year" : 2020
+    },
+    {
+        "Title" : "Stronger",
+        "Artist" : "Kanye West",
+        "Genre" : "Rap",
+        "Year" : 2007
+    },
+    {
+        "Title" : "Doubt",
+        "Artist" : "Twenty One Pilots",
+        "Genre" : "Indie",
+        "Year" : 2015
+    },
+    {
+        "Title" : "Dance Monkey",
+        "Artist" : "Tones and I",
+        "Genre" : "Electropop",
+        "Year" : 2020
+    },
+    {
+        "Title" : "Jenny Was a Friend of Mine",
+        "Artist" : "The Killers",
+        "Genre" : "Indie",
+        "Year" : 2004
+    },
+    {
+        "Title" : "The Evil Has Landed",
+        "Artist" : "Queens od the Stone Age",
+        "Genre" : "Rock",
+        "Year" : 2017
+    },
+    {
+        "Title" : "Out of the Black",
+        "Artist" : "Royal Blood",
+        "Genre" : "Rock",
+        "Year" : 2014
+    },
+    {
+        "Title" : "Old Yellow Bricks",
+        "Artist" : "Arctic Monkeys",
+        "Genre" : "Rock",
+        "Year" : 2007
+    }
+]
+}
+   

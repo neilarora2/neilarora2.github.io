@@ -1,0 +1,135 @@
+<style>
+    #filter{
+        position: absolute;
+        margin-left: 700px;
+        margin-top: 450px;
+    }
+    #userfilter{
+        position: absolute;
+        margin-left: 700px;
+        margin-top: 500px;
+    }
+</style>
+<body>
+    <a href=songs.json>JSON File</a>
+    <form id = "filter">
+        <label>Filter: </label>
+        <select id = "filtergenre">
+            <option></option>
+            <option>Pop</option>
+            <option>Punk</option>
+            <option>Rap</option>
+            <option>Indie</option>
+            <option>Electropop</option>
+            <option>Rock</option>
+        </select>
+    </form>
+    <div id = "userfilter"> </div>
+    <div id = "serialized"> </div>
+    <div id = "user"> </div>
+    <script>
+    songs = 
+    {"songs" : [
+        {
+            "Title" : "Teenage Dream",
+            "Artist" : "Katy Perry",
+            "Genre" : "Pop",
+            "Year" : 2010
+        },
+        {
+            "Title" : "Complicated",
+            "Artist" : "Avril Lavigne",
+            "Genre" : "Punk",
+            "Year" : 2002
+        },
+        {
+            "Title" : "i",
+            "Artist" : "Kendrick Lamar",
+            "Genre" : "Rap",
+            "Year" : 2015
+        },
+        {
+            "Title" : "Burn the House Down",
+            "Artist" : "AJR",
+            "Genre" : "Indie",
+            "Year" : 2017
+        },
+        {
+            "Title" : "Chicken Tenders",
+            "Artist" : "Dominic Fike",
+            "Genre" : "Indie",
+            "Year" : 2020
+        },
+        {
+            "Title" : "Stronger",
+            "Artist" : "Kanye West",
+            "Genre" : "Rap",
+            "Year" : 2007
+        },
+        {
+            "Title" : "Doubt",
+            "Artist" : "Twenty One Pilots",
+            "Genre" : "Indie",
+            "Year" : 2015
+        },
+        {
+            "Title" : "Dance Monkey",
+            "Artist" : "Tones and I",
+            "Genre" : "Electropop",
+            "Year" : 2020
+        },
+        {
+            "Title" : "Jenny Was a Friend of Mine",
+            "Artist" : "The Killers",
+            "Genre" : "Indie",
+            "Year" : 2004
+        },
+        {
+            "Title" : "The Evil Has Landed",
+            "Artist" : "Queens od the Stone Age",
+            "Genre" : "Rock",
+            "Year" : 2017
+        },
+        {
+            "Title" : "Out of the Black",
+            "Artist" : "Royal Blood",
+            "Genre" : "Rock",
+            "Year" : 2014
+        },
+        {
+            "Title" : "Old Yellow Bricks",
+            "Artist" : "Arctic Monkeys",
+            "Genre" : "Rock",
+            "Year" : 2007,
+
+
+        }
+    ],
+    toJSON() {
+            if(output == 1) return this;
+            thesongs = "Songs: ";
+            for(i = 0; i < this.songs.length; i++) {
+                if((output == 2) || (this.songs[i].Genre == document.getElementById("filtergenre").value))
+                    thesongs += "<p>" + this.songs[i].Title + "<br /> Artist: "
+                    + this.songs[i].Artist + "<br /> Genre: " + this.songs[i].Genre
+                    + "<br /> Released " + this.songs[i].Year + "<br /> <p/>" ;
+                }
+                return thesongs;
+            }
+    }
+    output = 1;
+    document.getElementById("serialized").innerHTML = "<p> <h1>Serialized Data:<h1 /> <h2>" +JSON.stringify(songs) + "<h2/> <p/>";
+    output = 2;
+    document.getElementById("user").innerHTML = "<p> <h1>All Songs: <h1 /> <h2>" + JSON.stringify(songs) + "<h2 /> <p/>";
+    
+    document.getElementById("filtergenre").onchange = function(){
+        output = 3;
+        document.getElementById("userfilter").innerHTML = "<p> <h1>" + document.getElementById("filtergenre").value + " Songs: <h1 /> <h2>" + JSON.stringify(songs) + "<h2 /> <p/>";
+    }
+   
+
+
+
+
+    </script>
+</body>
