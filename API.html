@@ -1,0 +1,49 @@
+<html>
+<head>
+  <title>Assignment 8: API</title>
+</head>
+<body>
+    <div id = "fetch"></div>
+    <div id = "get"></div>
+    <div>
+        <h1>Content</h1>
+        <div>
+        Decription: This API randomly generates different jokes with some information about each one, such as its type and category. <br/>
+        Citation: https://sv443.net/jokeapi/v2/ <br/>
+        Options: I used the get and fetch requests. <br/>
+        Applications: If a developer wanted to put a joke somewhere on their website. If a developer wanted to create a game where users would fill in the blanks for certain jokes.
+         </div>
+    </div>
+>    <script>
+        
+       function requestdata(){
+            var req = new XMLHttpRequest();
+            console.log(req.readyState);
+            if (! req) {
+                alert("Unable to create HTTPRequest object"); 
+                return;
+            }
+         
+            req.onreadystatechange = function(){
+                if(this.readyState==4 && this.status==200){
+                    var info = JSON.parse(this.responseText);
+                    output = "<h1>Get Data</h1>"
+                    for(i in info ){
+                        output += i + ":" + info[i] + "<br/>";
+                    }
+                    document.getElementById("get").innerHTML = output;
+                }
+            };
+            req.open("GET","https://v2.jokeapi.dev/joke/Any?safe-mode",true);
+            req.send();
+            console.log(req.readyState);
+
+       }
+        requestdata();
+        res = fetch("https://v2.jokeapi.dev/joke/Any?safe-mode")
+            .then (res => res.text())
+            .then (data => document.getElementById("fetch").innerHTML = "<h1>Fetch Data</h1>" + data)
+            .catch (error => console.log(error))
+     </script>
+</body> 
+</html>
